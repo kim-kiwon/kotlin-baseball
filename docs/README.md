@@ -1,7 +1,7 @@
 ## Kotlin-Baseball
 ### Todo
 - [x] Create answer by random number
-- [ ] Create game function that receive user input and compare with answer until exception is occurred or end
+- [x] Create game function that receive user input and compare with answer until exception is occurred or end
 - [ ] Create enum class that express strike, ball and nothing
 - [ ] Create function that compare with answer and user input. Then give result to user.
 - [ ] Throw IllegalArgumentException when user input is not valid
