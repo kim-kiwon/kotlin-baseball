@@ -1,7 +1,5 @@
 package baseball.ball
 
-import java.lang.IllegalArgumentException
-
 class Balls(balls: List<Ball>){
     private val ballCount = balls.count { it == Ball.BALL }
     private val strikeCount = balls.count { it == Ball.STRIKE }

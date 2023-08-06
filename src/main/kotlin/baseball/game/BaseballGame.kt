@@ -1,7 +1,7 @@
 package baseball.game
 
-import baseball.ball.Ball
-import baseball.ball.Balls
+import baseball.util.UserInputHandler
+import baseball.util.UserViewer
 import camp.nextstep.edu.missionutils.Console
 
 class BaseballGame(private val answer: List<Int>) {
@@ -9,56 +9,16 @@ class BaseballGame(private val answer: List<Int>) {
         var isEnd = false
 
         while(!isEnd) {
-            val userInput = receiveUserInput()
-            val balls = compareWithAnswer(userInput)
+            UserViewer.printReceiveNumberMessage()
+            val userInput = Console.readLine()
+            val userNumbers = UserInputHandler.handleGameInput(userInput)
+
+            val referee = Referee(answer, userNumbers)
+            val balls = referee.compareWithAnswer()
 
             println(balls)
             isEnd = balls.isEnd()
         }
-        printEndMessage()
-    }
-
-    private fun receiveUserInput(): List<Int> {
-        print("숫자를 입력해주세요 : ")
-        val strInput = Console.readLine()
-
-        validateStrInput(strInput)
-        return strInput.toList().map { "$it".toInt() }
-    }
-
-    private fun validateStrInput(strInput: String) {
-        if (strInput.length != 3) {
-            throw IllegalArgumentException("strInput must have a length of 3")
-        }
-
-        if (!strInput.all { it.isDigit() }) {
-            throw IllegalArgumentException("strInput must contain only numeric characters")
-        }
-
-        if (strInput.contains('0')) {
-            throw IllegalArgumentException("strInput must not contain 0")
-        }
-
-        if (strInput.toList().size != strInput.toSet().size) {
-            throw IllegalArgumentException("strInput must not have duplicated number")
-        }
-    }
-
-    private fun compareWithAnswer(userInput: List<Int>): Balls {
-        val balls = mutableListOf<Ball>()
-
-        for (i in userInput.indices) {
-            when {
-                userInput[i] == answer[i] -> balls.add(Ball.STRIKE)
-                userInput[i] in answer -> balls.add(Ball.BALL)
-                else -> Unit
-            }
-        }
-
-        return Balls(balls)
-    }
-
-    private fun printEndMessage() {
-        println("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
+        UserViewer.printGameFinishMessage()
     }
 }
