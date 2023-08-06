@@ -1,15 +1,20 @@
 package baseball.game
 
+import baseball.ball.Ball
+import baseball.ball.Balls
 import camp.nextstep.edu.missionutils.Console
 
 class BaseballGame(val answer: List<Int>) {
     fun play() {
-        var isAnswer = false
+        var isEnd = false
 
         printStartMessage()
-        while(!isAnswer) {
+        while(!isEnd) {
             val userInput = receiveUserInput()
-            isAnswer = compareWithAnswer(userInput)
+            val balls = compareWithAnswer(userInput)
+
+            println(balls)
+            isEnd = balls.isEnd()
         }
         printEndMessage()
     }
@@ -30,9 +35,18 @@ class BaseballGame(val answer: List<Int>) {
         TODO("Validate strInput. All element should be numeric string.")
     }
 
-    private fun compareWithAnswer(userInput: List<Int>): Boolean {
-        TODO("compare with userInput and answer")
-        TODO("compareWithAnswer should return Ball and Strike info.")
+    private fun compareWithAnswer(userInput: List<Int>): Balls {
+        val balls = mutableListOf<Ball>()
+
+        for (i in userInput.indices) {
+            when {
+                userInput[i] == answer[i] -> balls.add(Ball.STRIKE)
+                userInput[i] in answer -> balls.add(Ball.BALL)
+                else -> Unit
+            }
+        }
+
+        return Balls(balls)
     }
 
     private fun printEndMessage() {
