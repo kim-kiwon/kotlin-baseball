@@ -1,6 +1,6 @@
 package baseball.ball
 
-class Balls(balls: List<Ball>){
+class Balls(val balls: List<Ball>){
     private val ballCount = balls.count { it == Ball.BALL }
     private val strikeCount = balls.count { it == Ball.STRIKE }
 
