@@ -4,11 +4,10 @@ import baseball.ball.Ball
 import baseball.ball.Balls
 import camp.nextstep.edu.missionutils.Console
 
-class BaseballGame(val answer: List<Int>) {
+class BaseballGame(private val answer: List<Int>) {
     fun play() {
         var isEnd = false
 
-        printStartMessage()
         while(!isEnd) {
             val userInput = receiveUserInput()
             val balls = compareWithAnswer(userInput)
@@ -19,12 +18,8 @@ class BaseballGame(val answer: List<Int>) {
         printEndMessage()
     }
 
-    private fun printStartMessage() {
-        println("숫자 야구 게임을 시작합니다.")
-    }
-
     private fun receiveUserInput(): List<Int> {
-        println("숫자를 입력해주세요 : ")
+        print("숫자를 입력해주세요 : ")
         val strInput = Console.readLine()
 
         validateStrInput(strInput)
