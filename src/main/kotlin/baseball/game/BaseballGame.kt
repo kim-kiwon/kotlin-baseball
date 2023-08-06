@@ -32,7 +32,21 @@ class BaseballGame(val answer: List<Int>) {
     }
 
     private fun validateStrInput(strInput: String) {
-        TODO("Validate strInput. All element should be numeric string.")
+        if (strInput.length != 3) {
+            throw IllegalArgumentException("strInput must have a length of 3")
+        }
+
+        if (!strInput.all { it.isDigit() }) {
+            throw IllegalArgumentException("strInput must contain only numeric characters")
+        }
+
+        if (strInput.contains('0')) {
+            throw IllegalArgumentException("strInput must not contain 0")
+        }
+
+        if (strInput.toList().size != strInput.toSet().size) {
+            throw IllegalArgumentException("strInput must not have duplicated number")
+        }
     }
 
     private fun compareWithAnswer(userInput: List<Int>): Balls {

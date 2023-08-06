@@ -4,7 +4,7 @@
 - [x] Create game function that receive user input and compare with answer until exception is occurred or end
 - [x] Create enum class that express strike, ball and nothing
 - [x] Create function that compare with answer and user input. Then give result to user.
-- [ ] Throw IllegalArgumentException when user input is not valid
+- [x] Throw IllegalArgumentException when user input is not valid
 
 ### 책임 분배
 - BaseballGame
